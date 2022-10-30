@@ -34,7 +34,7 @@ class ServiceMonitor {
   }
 
   public stop() {
-    this.ready.then(() => pm2.stop(processId, () => pm2.disconnect()));
+    this.ready.then(() => pm2.delete(processId, () => pm2.disconnect()));
     this.active = false;
     return this;
   }
