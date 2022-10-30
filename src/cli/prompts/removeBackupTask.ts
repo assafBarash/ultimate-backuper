@@ -1,9 +1,9 @@
 import prompts from 'prompts';
 import fs from 'fs';
-import { BACKUP_LIST_FILE } from '../utils';
+import { getBackupListFile } from '../../utils';
 
 export const buildRemoveBackupTask = () => {
-  const backupList = fs.readFileSync(BACKUP_LIST_FILE).toString();
+  const backupList = fs.readFileSync(getBackupListFile()).toString();
   return {
     title: 'remove backup task',
     disabled: !backupList,
@@ -32,7 +32,7 @@ export const buildRemoveBackupTask = () => {
           .filter((task) => !remove.includes(task))
           .join(';');
 
-        fs.writeFileSync(BACKUP_LIST_FILE, content);
+        fs.writeFileSync(getBackupListFile(), content);
       }),
   };
 };

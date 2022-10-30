@@ -15,6 +15,10 @@ class ServiceMonitor {
 
         pm2.list((err, apps) => {
           this.active = !!apps.find(({ name }) => name === processId);
+          console.log(
+            '@@-',
+            apps.map(({ name }) => name)
+          );
           resolve(undefined);
         });
       })

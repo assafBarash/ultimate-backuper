@@ -1,12 +1,15 @@
 import prompts from 'prompts';
 import fs from 'fs';
-import { BACKUP_LIST_FILE } from './utils';
 import { buildMainMenu } from './prompts/mainMenu';
 import { validateGit, validateSsh } from './requirementValidators';
 import { serviceMonitor } from './serviceMonitor';
+import { getBackupListFile, getUltimateBackuperDir } from '../utils';
 
-const setup = () =>
-  !fs.existsSync(BACKUP_LIST_FILE) && fs.writeFileSync(BACKUP_LIST_FILE, '');
+const setup = () => {
+  fs.mkdirSync(getUltimateBackuperDir(), { recursive: true });
+  !fs.existsSync(getBackupListFile()) &&
+    fs.writeFileSync(getBackupListFile(), '');
+};
 
 const validateRequirements = async () => {
   await validateGit();

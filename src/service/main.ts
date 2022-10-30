@@ -1,3 +1,7 @@
 import fs from 'fs';
+import { getBackupListFile } from '../utils';
 
-const testFile = './service-test.txt';
+console.log(
+  '@@-service',
+  fs.readFileSync(getBackupListFile()).toString().split(';')
+);
