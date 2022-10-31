@@ -12,13 +12,10 @@ function main() {
     .map(
       ([name, dir]) =>
         new CronJob('0-59 * * * *', () => {
-          console.log('@@-', name, dir);
-          const content = fs
-            .readFileSync(path.join(process.cwd(), 'service-test.txt'))
-            .toString();
           fs.writeFileSync(
             path.join(process.cwd(), 'service-test.txt'),
-            content + '\n' + name + '|' + dir
+            name + '|' + dir + '\n',
+            { flag: 'w' }
           );
         })
     )
